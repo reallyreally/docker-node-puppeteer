@@ -20,6 +20,7 @@ RUN npm i puppeteer
 # Add user so we don't need --no-sandbox.
 RUN adduser -D pptruser pptruser && addgroup pptruser audio && addgroup pptruser video && \
     mkdir /home/pptruser/.ssh && \
+    mkdir -p /usr/src/app && \    
     touch /home/pptruser/.ssh/repo-key && \
     echo "IdentityFile /home/pptruser/.ssh/repo-key" > /home/pptruser/.ssh/config && \
     chmod 600 /home/pptruser/.ssh/config && \
