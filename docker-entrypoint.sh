@@ -6,7 +6,7 @@ if [ -z "$NODE_ENV" ]; then
   export NODE_ENV
 fi
 
-if [ ! -d "/usr/src/app" ]; then
+if [ ! -f "/usr/src/app/package.json" ]; then
 
   if [ ! -z "$PACKAGES" ]; then
     apk add --no-cache $PACKAGES
@@ -47,7 +47,7 @@ if [ ! -d "/usr/src/app" ]; then
 
 fi
 
-if [ -d "/usr/src/app" ]; then
+if [ -d "/usr/src/app" ] && [ -f "/usr/src/app/$1" ]; then
   cd /usr/src/app || exit
   pm2-docker $@
 else

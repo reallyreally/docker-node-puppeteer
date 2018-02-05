@@ -20,7 +20,7 @@ RUN npm i puppeteer
 # Add user so we don't need --no-sandbox.
 RUN adduser -D pptruser pptruser && addgroup pptruser audio && addgroup pptruser video && \
     mkdir /home/pptruser/.ssh && \
-    mkdir -p /usr/src/app && \    
+    mkdir -p /usr/src/app && \
     touch /home/pptruser/.ssh/repo-key && \
     echo "IdentityFile /home/pptruser/.ssh/repo-key" > /home/pptruser/.ssh/config && \
     chmod 600 /home/pptruser/.ssh/config && \
@@ -28,14 +28,15 @@ RUN adduser -D pptruser pptruser && addgroup pptruser audio && addgroup pptruser
     mkdir -p /home/pptruser/Downloads
 
 COPY known_hosts /home/pptruser/.ssh/known_hosts
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /home/pptruser/
 
-RUN chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /node_modules \
-    && chown -R pptruser:pptruser /usr/src/app
+RUN chown -R pptruser:pptruser /home/pptruser && \
+    chown -R pptruser:pptruser /node_modules && \
+    chown -R pptruser:pptruser /usr/src/app && \
+    chmod 755 /home/pptruser/docker-entrypoint.sh
 
 # Run everything after as non-privileged user.
 USER pptruser
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/home/pptruser/docker-entrypoint.sh"]
 CMD ["google-chrome-unstable"]
