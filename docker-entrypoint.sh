@@ -8,12 +8,8 @@ fi
 
 if [ ! -f "/usr/src/app/package.json" ]; then
 
-  if [ ! -z "$PACKAGES" ]; then
-    apk add --no-cache $PACKAGES
-  fi
-
   if [ ! -z "$NPM_TOKEN" ]; then
-    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /root/.npmrc
+    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /home/pptruser/.npmrc
   fi
 
   if [ ! -z "$REPO_KEY" ]; then
