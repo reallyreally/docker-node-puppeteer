@@ -18,7 +18,7 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN npm i puppeteer
 
 # Add user so we don't need --no-sandbox.
-RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser && \
+RUN adduser -D pptruser pptruser && addgroup pptruser audio && addgroup pptruser video && \
     mkdir /home/pptruser/.ssh && \
     touch /home/pptruser/.ssh/repo-key && \
     echo "IdentityFile /home/pptruser/.ssh/repo-key" > /home/pptruser/.ssh/config && \
