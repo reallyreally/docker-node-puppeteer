@@ -2,7 +2,7 @@ FROM alpine:edge
 
 MAINTAINER Troy Kelly <troy.kelly@really.ai>
 
-ENV VERSION=v9.3.0 NPM_VERSION=5.5.1 YARN_VERSION=latest
+ENV VERSION=v8.9.4 NPM_VERSION=5.6.0 YARN_VERSION=latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
