@@ -21,11 +21,16 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 # For base builds
 #ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+#ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV CHROME_BIN=/usr/bin/chromium-browser
 
-RUN apk update && \
+RUN echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+    apk --no-cache update && apk --no-cache  upgrade && \
   apk add --no-cache openssh-client git curl make gcc g++ python \
-  linux-headers binutils-gold gnupg libstdc++ udev ttf-freefont chromium && \
+  linux-headers binutils-gold gnupg libstdc++ udev \
+  gifsicle pngquant optipng libjpeg-turbo-utils ttf-opensans nss@edge chromium@edge && \
   gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
