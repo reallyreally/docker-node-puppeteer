@@ -48,3 +48,7 @@ In the example we call `./pm2.json` which could contain the below.
 ```
 
 If you do not want to use `./pm2.json` You equally could just replace it with `./bin/www` for a typical [ExpressJS](https://ExpressJS.com) application (you will loose the ability to configure PM2 clustering etc).
+
+Puppeteer
+---------
+Version 0.12.0 is supported until a version of Chromium greater than 63 is available.
